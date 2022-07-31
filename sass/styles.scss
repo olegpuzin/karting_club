@@ -1,0 +1,2388 @@
+@import "core/extends";
+@import "core/mixins";
+@import "helpers/rezet";
+
+@font-face {
+    font-family: GilroyMedium;
+    src: url('../fonts/gilroy/Gilroy-Medium.eot') format('eot');
+    src: url('../fonts/gilroy/Gilroy-Medium.ttf') format('truetype');
+    src: url('../fonts/gilroy/Gilroy-Medium.woff') format('woff');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: GilroyRegular;
+    src: url('../fonts/gilroy/Gilroy-Regular.eot?') format('eot');
+    src: url('../fonts/gilroy/Gilroy-Regular.ttf') format('truetype');
+    src: url('../fonts/gilroy/Gilroy-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: GilroySemiBold;
+    src: url('../fonts/gilroy/Gilroy-SemiBold.eot?') format('eot');
+    src: url('../fonts/gilroy/Gilroy-SemiBold.ttf') format('truetype');
+    src: url('../fonts/gilroy/Gilroy-SemiBold.woff') format('woff');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: DotGothic16;
+    src: url('../fonts/dotGothic16/DotGothic16-Regular.eot') format('eot');
+    src: url('../fonts/dotGothic16/DotGothic16-Regular.ttf') format('truetype');
+    src: url('../fonts/dotGothic16/DotGothic16-Regular.woff') format('woff');
+    font-style: normal;
+}
+
+body {
+    max-width: 1920px;
+    width: 100%;
+    background-color: #031923;
+
+    @include widthMedia(max, 1601px) {
+        max-width: 1601px;
+        width: 100%;
+    }
+
+    @include widthMedia(max, 1369px) {
+        max-width: 1369px;
+        width: 100%;
+    }
+
+    @include widthMedia(max, 600px) {
+        max-width: 569px;
+        width: 100%;
+    }
+
+    @include widthMedia(max, 481px) {
+        max-width: 480px;
+        width: 100%;
+    }
+
+    @include widthMedia(max, 376px) {
+        max-width: 375px;
+        width: 100%;
+    }
+}
+
+body._lock {
+    overflow: hidden;
+}
+
+header {
+    max-width: 1920px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 120px;
+
+    @include widthMedia(max, 1601px) {
+        max-width: 1601px;
+        width: 100%;
+        padding: 0 80px;
+    }
+
+    @include widthMedia(max, 481px) {
+        max-width: 480px;
+        width: 100%;
+        padding: 0 30px;
+    }
+
+    @include widthMedia(max, 376px) {
+        max-width: 375px;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    @include widthMedia(max, 321px) {
+        max-width: 320px;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .logo_img {
+        width: 194px;
+        height: 112px;
+
+        @include widthMedia(max, 481px) {
+            width: 100px;
+            height: 58px;
+        }
+
+        @include widthMedia(max, 376px) {
+            width: 100px;
+            height: 58px;
+        }
+
+        @include widthMedia(max, 321px) {
+            width: 80px;
+            height: 45px;
+        }
+    }
+
+    .burger_btn {
+        display: none;
+
+        @include widthMedia(max, 481px) {
+            display: block;
+            width: 35px;
+            height: 28px;
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin-left: auto;
+            position: relative;
+            transition: 0.4s;
+        }
+
+        span {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: white;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            transition: 0.4s;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 10px;
+                width: 100%;
+                height: 2px;
+                background-color: white;
+                transition: 0.4s;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 10px;
+                width: 100%;
+                height: 2px;
+                background-color: white;
+                transition: 0.4s;
+            }
+        }
+    }
+
+    .burger_btn._open_burger_btn {
+        z-index: 3;
+
+        span {
+            background-color: transparent;
+            transition: 0.4s;
+
+            &::before {
+                transform: rotate(45deg);
+                transition: 0.4s;
+                top: 0;
+            }
+
+            &::after {
+                content: "";
+                transform: rotate(-45deg);
+                bottom: 0;
+                transition: 0.4s;
+            }
+        }
+    }
+
+    .header_nav._open_header_nav {
+        top: 0;
+    }
+
+    .header_nav {
+        max-width: 1200px;
+        width: 100%;
+
+        @include widthMedia(max, 1601px) {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        @include widthMedia(max, 600px) {
+            width: 100%;
+            display: block;
+            position: fixed;
+            top: -300%;
+            right: 0;
+            z-index: 2;
+            border-radius: 0 0 16px 16px;
+            background: linear-gradient(180deg, #00d8a4ed 0%, #009470 100%);
+            box-shadow: 0 4px 2px -2px white;
+            transition: all 0.4s ease;
+        }
+
+        .header_menu {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @include widthMedia(max, 481px) {
+                display: block;
+                padding-top: 30px;
+                padding-bottom: 10px;
+            }
+
+
+            .header_menu_category {
+                display: flex;
+                justify-content: space-between;
+                text-align: center;
+
+                @include widthMedia(max, 481px) {
+                    margin: 30px 0;
+                    justify-content: center;
+                }
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+
+                .header_menu_category_link {
+                    @include fontFamily('GilroyMedium', normal, 18px, 500, #FFFFFF);
+                    line-height: 21px;
+
+                    @include widthMedia(max, 481px) {
+                        @include fontFamily('DotGothic16', normal, 16px, 700, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        @include fontFamily('DotGothic16', normal, 14px, 700, #FFFFFF);
+                    }
+
+                    &:hover {
+                        transition: 0.2s;
+                        @include fontFamily('GilroyMedium', normal, 24px, 500, #00FFA3);
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('DotGothic16', normal, 20px, 700, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            @include fontFamily('DotGothic16', normal, 18px, 700, #FFFFFF);
+                        }
+                    }
+
+                    &:active {
+                        transition: 0.2s;
+                        @include fontFamily('GilroyMedium', normal, 24px, 500, #00422a);
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('DotGothic16', normal, 20px, 700, #00422a);
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            @include fontFamily('DotGothic16', normal, 18px, 700, #00422a);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+main {
+    width: 100%;
+
+    .hero_and_carts {
+
+        .hero {
+            position: relative;
+
+            .hero_picture {
+
+                .hero_picture_img {
+                    width: 100%;
+                }
+
+                .hero_picture_bg {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 0;
+                    padding-bottom: 50%;
+                    background: linear-gradient(180deg, #031923 0%, rgba(0, 0, 0, 0) 8.39%, rgba(0, 0, 0, 0) 57.87%, #031923 65.16%, #031923 100%), radial-gradient(50% 50% at 50% 50%, rgba(3, 25, 35, 0.1) 0%, rgba(3, 25, 35, 0.4) 100%);
+                }
+
+                .hero_picture_frame {
+                    position: absolute;
+                    top: 74%;
+                    width: 100%;
+                    height: 0;
+                    padding-bottom: 24%;
+                    background: url(../images/hero/frame.png) no-repeat center center/cover;
+                }
+
+                .hero_picture_vector_1 {
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    height: 0;
+                    padding-bottom: 57%;
+                    mix-blend-mode: screen;
+                    background: url(../images/hero/bgVector.png) no-repeat center center/cover;
+                }
+
+                .hero_picture_vector_2 {
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    height: 0;
+                    padding-bottom: 57%;
+                    background-image: url(../images/hero/blurRound.png);
+                    background-repeat: no-repeat;
+
+                    @include widthMedia(max, 569px) {
+                        background-position: center;
+                        background-size: cover;
+                    }
+                }
+
+                .hero_picture_vector_3 {
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    height: 0;
+                    padding-bottom: 57%;
+                    background-image: url(../images/hero/blurGroup.png);
+                    background-repeat: no-repeat;
+
+                    @include widthMedia(max, 569px) {
+                        background-position: center;
+                        background-size: cover;
+                    }
+                }
+            }
+
+            .hero_block {
+                position: absolute;
+                top: 78%;
+                left: 0;
+                right: 0;
+                margin: auto;
+                text-align: center;
+
+                .hero_title {
+                    @include fontFamily('DotGothic16', normal, 58px, 400, #FFFFFF);
+                    line-height: 84px;
+                    letter-spacing: -0.25em;
+
+                    @include widthMedia(max, 481px) {
+                        @include fontFamily('DotGothic16', normal, 19px, 400, #FFFFFF);
+                        margin-top: -25px;
+                    }
+
+                    @include widthMedia(max, 421px) {
+                        @include fontFamily('DotGothic16', normal, 16px, 400, #FFFFFF);
+                        margin-top: -25px;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        @include fontFamily('DotGothic16', normal, 14px, 400, #FFFFFF);
+                        margin-top: -30px;
+                    }
+
+                    @include widthMedia(max, 321px) {
+                        @include fontFamily('DotGothic16', normal, 12px, 400, #FFFFFF);
+                        margin-top: -35px;
+                    }
+                }
+
+                .hero_text {
+                    @include fontFamily('GilroyMedium', normal, 17px, 400, #FFFFFF);
+                    line-height: 1.6;
+                    margin-top: 20px;
+
+                    @include widthMedia(max, 481px) {
+                        @include fontFamily('GilroyMedium', normal, 6px, 400, #FFFFFF);
+                        margin-top: -20px;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        @include fontFamily('GilroyMedium', normal, 4px, 400, #FFFFFF);
+                        margin-top: -25px;
+                    }
+
+                    @include widthMedia(max, 321px) {
+                        @include fontFamily('GilroyMedium', normal, 4px, 400, #FFFFFF);
+                        margin-top: -30px;
+                    }
+                }
+
+                .hero_btn {
+                    width: 286px;
+                    height: 59px;
+                    margin-top: 34px;
+                    background: linear-gradient(180deg, #00D8A4 0%, #009470 100%);
+                    box-shadow: 6px 6px 17px rgba(3, 23, 32, 0.46);
+                    border-radius: 20px 4px;
+                    @include fontFamily('GilroyMedium', normal, 22px, 500, #FFFFFF);
+
+                    &:hover {
+                        background: linear-gradient(180deg, #02bc91 0%, #007155 100%);
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        width: 120px;
+                        height: 30px;
+                        @include fontFamily('GilroyMedium', normal, 10px, 500, #FFFFFF);
+                        margin-top: 15px;
+                        border-radius: 14px 2px;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        width: 100px;
+                        height: 25px;
+                        @include fontFamily('GilroyMedium', normal, 9px, 500, #FFFFFF);
+                        margin: 10px 0;
+                        border-radius: 12px 2px;
+                    }
+                }
+            }
+        }
+
+        .carts {
+            overflow-x: hidden;
+
+            .carts_bg_opacity {
+                position: absolute;
+                max-width: 1920px;
+                width: 100%;
+                height: 0;
+                padding-bottom: 66.5%;
+                background-image: url(../images/carts/bgCarts.png);
+                background-repeat: no-repeat;
+                background-blend-mode: overlay;
+                opacity: 0.2;
+
+                @include widthMedia(max, 1601px) {
+                    padding-bottom: 45%;
+                }
+
+                @include widthMedia(max, 1369px) {
+                    padding-bottom: 67%;
+                }
+
+                @include widthMedia(max, 569px) {
+                    background-position: center;
+                    background-size: cover;
+                    padding-bottom: 115%;
+                }
+            }
+
+            .carts_block {
+                padding: 0 120px;
+                padding-top: 150px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                @include widthMedia(max, 16001px) {
+                    max-width: 1601px;
+                    width: 100%;
+                    padding: 100px 80px 0;
+                }
+
+                @include widthMedia(max, 481px) {
+                    padding: 70px 30px 0;
+                }
+
+                @include widthMedia(max, 376px) {
+                    padding: 55px 30px 0;
+                }
+
+                @include widthMedia(max, 321px) {
+                    padding: 46px 30px 0;
+                }
+
+                .carts_block_left {
+
+                    .carts_block_left_title {
+                        @include fontFamily('DotGothic16', normal, 144px, 400, #FFFFFF);
+                        opacity: 0.1;
+
+                        @include widthMedia(max, 1369px) {
+                            @include fontFamily('DotGothic16', normal, 100px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            @include fontFamily('DotGothic16', normal, 50px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('DotGothic16', normal, 40px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            @include fontFamily('DotGothic16', normal, 35px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 321px) {
+                            @include fontFamily('DotGothic16', normal, 30px, 400, #FFFFFF);
+                        }
+                    }
+                }
+
+                .carts_block_right {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-end;
+
+                    .carts_block_right_text {
+                        @include fontFamily('GilroyMedium', normal, 18px, 400, #FFFFFF);
+                        letter-spacing: 0.25em;
+                        opacity: 0.7;
+
+                        @include widthMedia(max, 1369px) {
+                            @include fontFamily('GilroyMedium', normal, 14px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('GilroyMedium', normal, 7px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            @include fontFamily('GilroyMedium', normal, 5px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('GilroyMedium', normal, 4px, 400, #FFFFFF);
+                        }
+                    }
+
+                    .carts_block_right_line {
+                        width: 219px;
+                        height: 2px;
+                        background-color: #FFFFFF;
+                        margin-bottom: 5px;
+                        margin-left: 15px;
+                        z-index: 1;
+
+                        @include widthMedia(max, 1369px) {
+                            width: 150px;
+                            margin-left: 10px;
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            width: 100px;
+                            height: 0.5px;
+                            margin-left: 5px;
+                            opacity: 0.8;
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            width: 80px;
+                            margin-left: 2px;
+                            margin-bottom: 2px;
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            width: 50px;
+                            margin-bottom: 1px;
+                        }
+                    }
+
+                    .carts_block_right_title {
+                        @include fontFamily('DotGothic16', normal, 58px, 400, #FFFFFF);
+                        letter-spacing: -0.25em;
+                        margin-left: 15px;
+                        z-index: 1;
+
+                        @include widthMedia(max, 1369px) {
+                            @include fontFamily('DotGothic16', normal, 50px, 400, #FFFFFF);
+                            margin-left: 10px;
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            @include fontFamily('DotGothic16', normal, 25px, 400, #FFFFFF);
+                            margin-left: 5px;
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            @include fontFamily('DotGothic16', normal, 20px, 400, #FFFFFF);
+                            margin-left: 2px;
+                        }
+
+                        @include widthMedia(max, 321px) {
+                            @include fontFamily('DotGothic16', normal, 18px, 400, #FFFFFF);
+                        }
+                    }
+                }
+            }
+
+            .swiper_conteiner {
+            
+                .swiper {
+                    width: 100%;
+                    height: 100%;
+
+                    @include widthMedia(min, 482px) {
+                        display: none;
+                    }
+                
+                    @include widthMedia(max, 481px) {
+                        display: block;
+                    }
+            
+                    .swiper-button-next::after, .swiper-button-prev::after {
+                        color: white;
+                    }
+                    
+                    .car_box {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    
+                        .car_img {
+                            max-height: 200px;
+                        }
+
+                        .car_title {
+                            @include fontFamily('DotGothic16', normal, 14px, 700, #00FFA3);
+                            margin-bottom: 20px;
+                        }
+                    }	
+                }
+            }
+
+            .carts_cars {
+                @include widthMedia(min, 481px) {
+                    position: relative;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                @include widthMedia(max, 481px) {
+                    display: none;
+                }
+
+                .carts_cars_dobly_box {
+                    max-width: 453px;
+                    width: 100%;
+                    padding-left: 35px;
+
+                    @include widthMedia(max, 1601px) {
+                        max-width: 340px;
+                        width: 100%;
+                        padding-left: 10px;
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        max-width: 115px;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        max-width: 90px;
+                    }
+
+                    @include widthMedia(max, 321px) {
+                        max-width: 78px;
+                    }
+
+                    .carts_cars_dobly_img {
+                        max-width: 453px;
+                        width: 100%;
+                        height: 0;
+                        padding-bottom: 100%;
+                        background: url(../images/carts/doblyCarts.png) no-repeat center 100%/100%;
+
+                        @include widthMedia(max, 1601px) {
+                            max-width: 340px;
+                            width: 100%;
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            max-width: 115px;
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            max-width: 90px;
+                        }
+
+                        @include widthMedia(max, 321px) {
+                            max-width: 78px;
+                        }
+
+                        .carts_name_dobly {
+                            @include fontFamily('DotGothic16', normal, 36px, 400, #FFFFFF);
+                            letter-spacing: -0.25em;
+                            padding-top: 380px;
+                            padding-left: 75px;
+
+                            @include widthMedia(max, 1601px) {
+                                @include fontFamily('DotGothic16', normal, 30px, 400, #FFFFFF);
+                                padding-top: 280px;
+                                padding-left: 50px;
+                            }
+
+                            @include widthMedia(max, 481px) {
+                                @include fontFamily('DotGothic16', normal, 10px, 400, #FFFFFF);
+                                padding-top: 95px;
+                                padding-left: 15px;
+                            }
+
+                            @include widthMedia(max, 376px) {
+                                @include fontFamily('DotGothic16', normal, 7px, 400, #FFFFFF);
+                                padding-top: 78px;
+                                padding-left: 8px;
+                            }
+
+                            @include widthMedia(max, 321px) {
+                                padding-top: 65px;
+                                padding-left: 5px;
+                            }
+                        }
+                    }
+                }
+
+                .carts_car_big_box {
+                    max-width: 1118px;
+                    width: 100%;
+                    margin-top: -118px;
+
+                    @include widthMedia(max, 1601px) {
+                        max-width: 838px;
+                        width: 100%;
+                        margin-top: -30px;
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        max-width: 280px;
+                        margin-top: 15px;
+                        margin-left: 0;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        max-width: 200px;
+                    }
+
+                    .carts_cars_big_img {
+                        max-width: 1118px;
+                        width: 100%;
+                        height: 0;
+                        padding-bottom: 74.2%;
+                        background: url(../images/carts/bigCarts.png) no-repeat center center/cover;
+
+                        @include widthMedia(max, 1601px) {
+                            max-width: 838px;
+                            width: 100%;
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            max-width: 280px;
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            max-width: 200px;
+                        }
+
+                        @include widthMedia(max, 321px) {
+                            max-width: 150px;
+                        }
+
+                        .carts_name_big {
+                            @include fontFamily('DotGothic16', normal, 36px, 400, #FFFFFF);
+                            letter-spacing: -0.25em;
+                            padding-top: 580px;
+                            padding-left: 665px;
+
+                            @include widthMedia(max, 1601px) {
+                                @include fontFamily('DotGothic16', normal, 30px, 400, #FFFFFF);
+                                padding-top: 470px;
+                                padding-left: 525px;
+                            }
+
+                            @include widthMedia(max, 1369px) {
+                                @include fontFamily('DotGothic16', normal, 30px, 400, #FFFFFF);
+                                padding-top: 450px;
+                                padding-left: 460px;
+                            }
+
+                            @include widthMedia(max, 481px) {
+                                @include fontFamily('DotGothic16', normal, 10px, 400, #FFFFFF);
+                                padding-top: 165px;
+                                padding-left: 43%;
+                            }
+
+                            @include widthMedia(max, 421px) {
+                                @include fontFamily('DotGothic16', normal, 10px, 400, #FFFFFF);
+                                padding-top: 120px;
+                                padding-left: 33%;
+                            }
+
+                            @include widthMedia(max, 376px) {
+                                @include fontFamily('DotGothic16', normal, 7px, 400, #FFFFFF);
+                                padding-top: 120px;
+                                padding-left: 35%;
+                            }
+
+                            @include widthMedia(max, 321px) {
+                                padding-top: 105px;
+                            }
+                        }
+                    }
+                }
+
+                .carts_car_small_box {
+                    max-width: 423px;
+                    width: 100%;
+                    padding-right: 15px;
+
+                    @include widthMedia(max, 1601px) {
+                        max-width: 317px;
+                        width: 100%;
+                        padding-right: 10px;
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        max-width: 106px;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        max-width: 85px;
+                    }
+
+                    @include widthMedia(max, 321px) {
+                        max-width: 75px;
+                    }
+
+                    .carts_cars_small_img {
+                        max-width: 423px;
+                        width: 100%;
+                        height: 0;
+                        padding-bottom: 100%;
+                        background: url(../images/carts/smallCarts.png) no-repeat center 100%/100%;
+
+                        @include widthMedia(max, 1601px) {
+                            max-width: 317px;
+                            width: 100%;
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            max-width: 106px;
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            max-width: 85px;
+                        }
+
+                        @include widthMedia(max, 321px) {
+                            max-width: 75px;
+                        }
+
+                        .carts_name_small {
+                            @include fontFamily('DotGothic16', normal, 36px, 400, #FFFFFF);
+                            letter-spacing: -0.25em;
+                            padding-top: 375px;
+                            padding-left: 120px;
+
+                            @include widthMedia(max, 1601px) {
+                                @include fontFamily('DotGothic16', normal, 30px, 400, #FFFFFF);
+                                padding-top: 280px;
+                                padding-left: 100px;
+                            }
+
+                            @include widthMedia(max, 481px) {
+                                @include fontFamily('DotGothic16', normal, 10px, 400, #FFFFFF);
+                                padding-top: 90px;
+                                padding-left: 20px;
+                            }
+
+                            @include widthMedia(max, 376px) {
+                                @include fontFamily('DotGothic16', normal, 7px, 400, #FFFFFF);
+                                padding-top: 75px;
+                                padding-left: 20px;
+                            }
+
+                            @include widthMedia(max, 321px) {
+                                padding-top: 60px;
+                                padding-left: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .carts_big_title {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: -100px 0 70px 150px;
+
+                @include widthMedia(max, 1601px) {
+                    margin: -70px -50px 70px 0;
+                }
+
+                @include widthMedia(max, 1369px) {
+                    margin: 0 -50px 70px 0;
+                }
+
+                @include widthMedia(max, 481px) {
+                    margin: 0;
+                }
+
+                @include widthMedia(max, 450px) {
+                    margin: -5px 0 0 0;
+                }
+
+                @include widthMedia(max, 430px) {
+                    margin: 10px 0 0 0;
+                }
+
+                .carts_big_text {
+                    text-align: right;
+
+                    @include widthMedia(max, 481px) {
+                        text-align: center
+                    }
+
+                    .carts_big_subtitle_description {
+                        @include fontFamily('GilroyMedium', normal, 24px, 600, #FFFFFF);
+                        text-align: right;
+                        margin-bottom: 40px;
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('GilroyMedium', normal, 21px, 600, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            display: none;
+                        }
+                    }
+
+                    .carts_big_text_description {
+                        @include fontFamily('GilroyMedium', normal, 17px, 400, #FFFFFF);
+                        text-align: right;
+                        margin-bottom: 12px;
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('GilroyMedium', normal, 15px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('GilroyMedium', normal, 7px, 400, #FFFFFF);
+                            margin-bottom: 5px;
+                            text-align: center;
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            @include fontFamily('GilroyMedium', normal, 6px, 400, #FFFFFF);
+                            line-height: 0.8;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .booking {
+        position: relative;
+        width: 100%;
+        height: 0;
+        padding-bottom: 28.4%;
+        background-image: url(../images/booking/track.png);
+        background-repeat: no-repeat;
+        z-index: -1;
+
+        @include widthMedia(max, 1536px) {
+            padding-bottom: 39.4%;
+        }
+
+        @include widthMedia(max, 569px) {
+            background-position: center;
+            background-size: cover;
+        }
+
+        .booking_bg {
+
+            .booking_bg_rectangle {
+                width: 100%;
+                height: 0;
+                padding-bottom: 28.9%;
+                background-image: url(../images/booking/rectangle.png);
+                background-repeat: no-repeat;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+
+                @include widthMedia(max, 1601px) {
+                    padding-bottom: 39.4%;
+                }
+
+                @include widthMedia(max, 569px) {
+                    background-position: center;
+                    background-size: cover;
+                }
+
+            }
+
+            .booking_bg_vector {
+                width: 100%;
+                height: 0;
+                padding-bottom: 30.2%;
+                background-image: url(../images/booking/vector.png);
+                background-repeat: no-repeat;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+
+                @include widthMedia(max, 1536px) {
+                    padding-bottom: 39.4%;
+                }
+
+                @include widthMedia(max, 569px) {
+                    background-position: center;
+                    background-size: cover;
+                }
+            }
+
+            .booking_bg_eclipse {
+                width: 100%;
+                height: 0;
+                padding-bottom: 48.45%;
+                background-image: url(../images/booking/eclipse.png);
+                background-repeat: no-repeat;
+                position: absolute;
+                top: -30%;
+                left: 0;
+                z-index: -1;
+
+                @include widthMedia(max, 1601px) {
+                    padding-bottom: 51%;
+                }
+
+                @include widthMedia(max, 569px) {
+                    background-position: center;
+                    background-size: cover;
+                }
+            }
+
+            .booking_bg_gradiant {
+                width: 100%;
+                height: 0;
+                padding-bottom: 30.4%;
+                background-image: url(../images/booking/gradiantRound.png);
+                background-repeat: no-repeat;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+
+                @include widthMedia(max, 569px) {
+                    background-position: center;
+                    background-size: cover;
+                }
+            }
+
+            .booking_bg_gradiant_round {
+                width: 100%;
+                height: 0;
+                padding-bottom: 30.4%;
+                background-image: url(../images/booking/gradiantRound2.png);
+                background-repeat: no-repeat;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+
+                @include widthMedia(max, 569px) {
+                    background-position: center;
+                    background-size: cover;
+                }
+            }
+        }
+
+        .booking_title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 120px 0;
+
+            @include widthMedia(max, 1601px) {
+                padding: 50px 80px 0;
+            }
+
+            @include widthMedia(max, 569px) {
+                padding: 0 30px;
+            }
+
+            @include widthMedia(max, 481px) {
+                padding: 0 30px;
+            }
+
+            @include widthMedia(max, 376px) {
+                padding: 0 20px;
+            }
+
+            @include widthMedia(max, 321px) {
+                padding: 0 10px;
+            }
+
+            .booking_title_left {
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+
+                .booking_title_left_text {
+                    @include fontFamily('DotGothic16', normal, 58px, 400, #FFFFFF);
+                    letter-spacing: -0.25em;
+
+                    @include widthMedia(max, 1601px) {
+                        @include fontFamily('DotGothic16', normal, 50px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 1369px) {
+                        @include fontFamily('DotGothic16', normal, 40px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 569px) {
+                        @include fontFamily('DotGothic16', normal, 18px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        @include fontFamily('DotGothic16', normal, 18px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 450px) {
+                        @include fontFamily('DotGothic16', normal, 14px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 321px) {
+                        @include fontFamily('DotGothic16', normal, 13px, 400, #FFFFFF);
+                    }
+                }
+
+                .booking_title_left_line {
+                    width: 200px;
+                    height: 2px;
+                    background-color: #FFFFFF;
+                    margin-left: 15px;
+                    margin-bottom: 5px;
+
+                    @include widthMedia(max, 1601px) {
+                        width: 120px;
+                        margin-left: 10px;
+                    }
+
+                    @include widthMedia(max, 569px) {
+                        width: 50px;
+                        height: 0.5px;
+                        margin-left: 5px;
+                        margin-bottom: 1px;
+                        opacity: 0.8;
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        width: 40px;
+                        margin-left: 3px;
+                    }
+
+                    @include widthMedia(max, 450px) {
+                        width: 35px;
+                    }
+
+                    @include widthMedia(max, 321px) {
+                        width: 30px;
+                    }
+                }
+
+                .booking_title_left_description {
+                    @include fontFamily('GilroyMedium', normal, 18px, 400, #FFFFFF);
+                    opacity: 0.7;
+                    letter-spacing: 0.25em;
+                    margin-left: 15px;
+
+                    @include widthMedia(max, 1601px) {
+                        @include fontFamily('GilroyMedium', normal, 16px, 400, #FFFFFF);
+                        margin-left: 10px;
+                    }
+
+                    @include widthMedia(max, 1369px) {
+                        @include fontFamily('GilroyMedium', normal, 14px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 569px) {
+                        @include fontFamily('GilroyMedium', normal, 6px, 400, #FFFFFF);
+                        margin-left: 2px;
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        @include fontFamily('GilroyMedium', normal, 5px, 400, #FFFFFF);
+                        margin-left: 2px;
+                    }
+
+                    @include widthMedia(max, 450px) {
+                        @include fontFamily('GilroyMedium', normal, 4px, 400, #FFFFFF);
+                        margin-left: 2px;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        @include fontFamily('GilroyMedium', normal, 3px, 400, #FFFFFF);
+                        margin-left: 2px;
+                    }
+                }
+            }
+
+            .booking_title_right {
+
+                .booking_title_right_text {
+                    @include fontFamily('DotGothic16', normal, 144px, 400, #FFFFFF);
+                    opacity: 0.1;
+                    text-align: right;
+
+                    @include widthMedia(max, 1601px) {
+                        @include fontFamily('DotGothic16', normal, 122px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 1369px) {
+                        @include fontFamily('DotGothic16', normal, 100px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 569px) {
+                        @include fontFamily('DotGothic16', normal, 40px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        @include fontFamily('DotGothic16', normal, 40px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 450px) {
+                        @include fontFamily('DotGothic16', normal, 35px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 321px) {
+                        @include fontFamily('DotGothic16', normal, 30px, 400, #FFFFFF);
+                    }
+                }
+            }
+        }
+
+        .booking_wrapper_track {
+            padding: 0 120px;
+
+            @include widthMedia(max, 1601px) {
+                padding: 0 80px;
+            }
+
+            @include widthMedia(max, 569px) {
+                padding: 0 30px;
+            }
+
+            @include widthMedia(max, 450px) {
+                padding: 0 20px;
+            }
+
+            @include widthMedia(max, 321px) {
+                padding: 0 10px;
+            }
+
+            .booking_description_track {
+                max-width: 524px;
+                width: 100%;
+                max-height: 100px;
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 20px;
+
+                @include widthMedia(max, 481px) {
+                    margin: 8px 0;
+                    align-items: center;
+                }
+
+                .booking_description_track_text {
+                    @include fontFamily('GilroyMedium', normal, 17px, 400, #FFFFFF);
+                    margin-bottom: 10px;
+
+                    @include widthMedia(max, 1601px) {
+                        @include fontFamily('GilroyMedium', normal, 15px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 569px) {
+                        @include fontFamily('GilroyMedium', normal, 8px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        @include fontFamily('GilroyMedium', normal, 7px, 400, #FFFFFF);
+                        line-height: 1.7;
+                        text-align: center;
+                        margin: 0;
+                    }
+
+                    @include widthMedia(max, 450px) {
+                        @include fontFamily('GilroyMedium', normal, 6px, 400, #FFFFFF);
+                        line-height: 1.5;
+                    }
+
+                    @include widthMedia(max, 321px) {
+                        @include fontFamily('GilroyMedium', normal, 5px, 400, #FFFFFF);
+                    }
+                }
+
+                .booking_description_track_subtext {
+                    @include fontFamily('GilroyMedium', normal, 17px, 400, #FFFFFF);
+
+                    @include widthMedia(max, 1601px) {
+                        @include fontFamily('GilroyMedium', normal, 15px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 569px) {
+                        @include fontFamily('GilroyMedium', normal, 8px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        @include fontFamily('GilroyMedium', normal, 7px, 400, #FFFFFF);
+                        line-height: 1.7;
+                        text-align: center;
+                    }
+
+                    @include widthMedia(max, 450px) {
+                        @include fontFamily('GilroyMedium', normal, 6px, 400, #FFFFFF);
+                        line-height: 1.5;
+                    }
+
+                    @include widthMedia(max, 321px) {
+                        @include fontFamily('GilroyMedium', normal, 5px, 400, #FFFFFF);
+                    }
+                }
+            }
+
+            .booking_parameter_track {
+                width: calc(50% + (286px / 2));
+                display: flex;
+                justify-content: space-between;
+                margin-top: 40px;
+
+                @include widthMedia(max, 481px) {
+                    width: 100%;
+                    margin: 0;
+                    align-items: center;
+                    flex-direction: column-reverse;
+                }
+
+                .booking_parameter_wrapper_track {
+                    display: flex;
+
+                    @include widthMedia(max, 481px) {
+                        width: 100%;
+                        justify-content: space-between;
+                    }
+
+                    .booking_parameter_track_box {
+                        margin-right: 100px;
+
+                        @include widthMedia(max, 481px) {
+                            margin: 0;
+                        }
+
+                        .booking_parameter_track_text {
+                            @include fontFamily('GilroyMedium', normal, 40px, 400, #00FFA3);
+                            margin-bottom: 10px;
+
+                            @include widthMedia(max, 1601px) {
+                                @include fontFamily('GilroyMedium', normal, 35px, 400, #00FFA3);
+                            }
+
+                            @include widthMedia(max, 569px) {
+                                @include fontFamily('GilroyMedium', normal, 18px, 400, #00FFA3);
+                                text-align: center;
+                            }
+
+                            @include widthMedia(max, 376px) {
+                                @include fontFamily('GilroyMedium', normal, 16px, 400, #00FFA3);
+                                margin-bottom: 0;
+                            }
+
+                        }
+
+                        .booking_parameter_track_description {
+                            @include fontFamily('GilroyMedium', normal, 17px, 400, #FFFFFF);
+
+                            @include widthMedia(max, 1601px) {
+                                @include fontFamily('GilroyMedium', normal, 15px, 400, #FFFFFF);
+                            }
+
+                            @include widthMedia(max, 569px) {
+                                @include fontFamily('GilroyMedium', normal, 8px, 400, #FFFFFF);
+                            }
+
+                            @include widthMedia(max, 481px) {
+                                @include fontFamily('GilroyMedium', normal, 7px, 400, #FFFFFF);
+                            }
+
+                            @include widthMedia(max, 376px) {
+                                @include fontFamily('GilroyMedium', normal, 6px, 400, #FFFFFF);
+                            }
+                        }
+                    }
+                }
+
+                .booking_btn {
+                    @include fontFamily('GilroyMedium', normal, 22px, 500, #FFFFFF);
+                    width: 286px;
+                    height: 59px;
+                    background: linear-gradient(180deg, #00D8A4 0%, #009470 100%);
+                    box-shadow: 6px 6px 17px rgba(3, 23, 32, 0.46);
+                    border-radius: 20px 4px;
+
+                    &:hover {
+                        background: linear-gradient(180deg, #02bc91 0%, #007155 100%);
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        width: 120px;
+                        height: 30px;
+                        @include fontFamily('GilroyMedium', normal, 10px, 500, #FFFFFF);
+                        margin: 15px 0;
+                        border-radius: 14px 2px;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        width: 100px;
+                        height: 25px;
+                        @include fontFamily('GilroyMedium', normal, 9px, 500, #FFFFFF);
+                        margin: 10px 0;
+                        border-radius: 12px 2px;
+                    }
+                }
+            }
+        }
+    }
+
+    .features_and_contacts {
+        width: 100%;
+        height: 0;
+        padding-bottom: 68%;
+        background-image: url(../images/features/bgVector.png);
+        background-repeat: no-repeat;
+        z-index: -1;
+
+        @include widthMedia(max, 1601px) {
+            padding-bottom: 69%;
+        }
+
+        @include widthMedia(max, 1539px) {
+            padding-bottom: 78%;
+        }
+
+        @include widthMedia(max, 1369px) {
+            padding-bottom: 73%;
+        }
+
+        @include widthMedia(max, 569px) {
+            padding-bottom: 204%;
+            background-position: center;
+            background-size: cover;
+        }
+
+        @include widthMedia(max, 481px) {
+            padding-bottom: 252%;
+        }
+
+        @include widthMedia(max, 450px) {
+            padding-bottom: 270%;
+        }
+
+        @include widthMedia(max, 420px) {
+            padding-bottom: 286%;
+        }
+
+        @include widthMedia(max, 391px) {
+            padding-bottom: 302%;
+        }
+
+        @include widthMedia(max, 376px) {
+            padding-bottom: 270%;
+        }
+
+        @include widthMedia(max, 361px) {
+            padding-bottom: 277%;
+        }
+
+        @include widthMedia(max, 321px) {
+            padding-bottom: 310%;
+        }
+
+        .features {
+            overflow-x: hidden;
+
+            .features_title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 120px;
+                margin: 50px 0;
+
+                @include widthMedia(max, 1601px) {
+                    padding: 0 80px;
+                }
+
+                @include widthMedia(max, 569px) {
+                    padding: 30px 30px;
+                    margin: 0;
+                }
+
+                @include widthMedia(max, 375px) {
+                    padding: 30px 20px;
+                }
+
+                @include widthMedia(max, 320px) {
+                    padding: 30px 10px;
+                }
+
+                .features_title_left {
+
+                    .features_title_left_text {
+                        @include fontFamily('DotGothic16', normal, 144px, 400, #FFFFFF);
+                        opacity: 0.1;
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('DotGothic16', normal, 122px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 1369px) {
+                            @include fontFamily('DotGothic16', normal, 100px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            @include fontFamily('DotGothic16', normal, 40px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('DotGothic16', normal, 30px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 391px) {
+                            @include fontFamily('DotGothic16', normal, 27px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 321px) {
+                            @include fontFamily('DotGothic16', normal, 25px, 400, #FFFFFF);
+                        }
+                    }
+                }
+
+                .features_title_right {
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-between;
+
+                    .features_title_right_description {
+                        @include fontFamily('GilroyMedium', normal, 18px, 400, #FFFFFF);
+                        opacity: 0.7;
+                        letter-spacing: 0.25em;
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('GilroyMedium', normal, 16px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 1369px) {
+                            @include fontFamily('GilroyMedium', normal, 14px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            @include fontFamily('GilroyMedium', normal, 6px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('GilroyMedium', normal, 5px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 391px) {
+                            @include fontFamily('GilroyMedium', normal, 3px, 400, #FFFFFF);
+                        }
+                    }
+
+                    .features_title_right_line {
+                        width: 200px;
+                        height: 2px;
+                        background-color: #FFFFFF;
+                        margin-bottom: 5px;
+                        margin-left: 10px;
+
+                        @include widthMedia(max, 1369px) {
+                            width: 150px;
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            width: 60px;
+                            height: 0.5px;
+                            margin-left: 5px;
+                            opacity: 0.8;
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            width: 50px;
+                            margin-bottom: 2px;
+                            margin-left: 2px;
+                        }
+
+                        @include widthMedia(max, 420px) {
+                            width: 40px;
+                            margin-bottom: 1px;
+                        }
+
+                        @include widthMedia(max, 391px) {
+                            width: 35px;
+                        }
+                    }
+
+                    .features_title_right_text {
+                        @include fontFamily('DotGothic16', normal, 58px, 400, #FFFFFF);
+                        letter-spacing: -0.25em;
+                        margin-left: 10px;
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('DotGothic16', normal, 50px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            @include fontFamily('DotGothic16', normal, 20px, 400, #FFFFFF);
+                            margin-left: 5px;
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('DotGothic16', normal, 18px, 400, #FFFFFF);
+                            margin-left: 2px;
+                        }
+
+                        @include widthMedia(max, 420px) {
+                            @include fontFamily('DotGothic16', normal, 16px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 391px) {
+                            @include fontFamily('DotGothic16', normal, 13px, 400, #FFFFFF);
+                        }
+                    }
+                }
+            }
+
+            .features_block {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding: 60px 120px 0;
+
+                @include widthMedia(max, 1601px) {
+                    padding: 60px 80px 0;
+                }
+
+                @include widthMedia(max, 569px) {
+                    padding: 0;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .features_box {
+                    display: flex;
+                    flex-direction: column;
+
+                    .features_item {
+                        max-width: 513px;
+                        width: 100%;
+                        height: 178px;
+                        padding: 0 26px;
+                        display: flex;
+                        align-items: center;
+                        border-radius: 16px;
+                        border: 2px solid #01b689;
+                        box-shadow: 8px 8px 72px rgba(0, 2, 7, 0.1);
+                        margin-bottom: 46px;
+
+                        @include widthMedia(max, 1601px) {
+                            max-width: 420px;
+                            width: 100%;
+                            margin-bottom: 40px;
+                        }
+
+                        @include widthMedia(max, 1369px) {
+                            max-width: 375px;
+                            width: 100%;
+                            height: 130px;
+                            margin-bottom: 30px;
+                            padding-left: 15px;
+                            padding-right: 10px;
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            max-width: 315px;
+                            width: 100%;
+                            height: 95px;
+                            margin-bottom: 20px;
+                            padding-left: 15px;
+                            padding-right: 10px;
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            max-width: 280px;
+                            width: 100%;
+                            height: 75px;
+                            margin-bottom: 12px;
+                            padding-left: 15px;
+                            padding-right: 10px;
+                        }
+
+                        .features_item_wrapper_img {
+
+                            .features_item_img {
+                                @include widthMedia(max, 1369px) {
+                                    width: 90px;
+                                }
+
+                                @include widthMedia(max, 481px) {
+                                    width: 70px;
+                                }
+
+                                @include widthMedia(max, 376px) {
+                                    width: 54px;
+                                }
+                            }
+                        }
+
+                        .features_item_wrapper_text {
+                            display: flex;
+                            flex-direction: column;
+                            margin-left: 20px;
+
+                            @include widthMedia(max, 1601px) {
+                                margin-left: 10px;
+                            }
+
+                            .features_item_text {
+                                @include fontFamily('GilroyMedium', normal, 24px, 600, #FFFFFF);
+                                margin-bottom: 25px;
+
+                                @include widthMedia(max, 1601px) {
+                                    @include fontFamily('GilroyMedium', normal, 20px, 600, #FFFFFF);
+                                    margin-bottom: 20px;
+                                }
+
+                                @include widthMedia(max, 1539px) {
+                                    margin-bottom: 10px;
+                                }
+
+                                @include widthMedia(max, 481px) {
+                                    @include fontFamily('GilroyMedium', normal, 15px, 600, #FFFFFF);
+                                }
+
+                                @include widthMedia(max, 376px) {
+                                    @include fontFamily('GilroyMedium', normal, 12px, 600, #FFFFFF);
+                                    margin-bottom: 8px;
+                                }
+                            }
+
+                            .features_item_subtext {
+                                @include fontFamily('GilroyMedium', normal, 14px, 400, #FFFFFF);
+                                opacity: 0.5;
+                                line-height: 1.5;
+
+                                @include widthMedia(max, 1601px) {
+                                    @include fontFamily('GilroyMedium', normal, 12px, 400, #FFFFFF);
+                                    line-height: 1.4;
+                                }
+
+                                @include widthMedia(max, 481px) {
+                                    @include fontFamily('GilroyMedium', normal, 8px, 400, #FFFFFF);
+                                    line-height: 1.4;
+                                }
+
+                                @include widthMedia(max, 376px) {
+                                    @include fontFamily('GilroyMedium', normal, 7px, 400, #FFFFFF);
+                                    line-height: 1.4;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .contacts {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 45%;
+            background-image: url(../images/contacts/bg.png);
+            background-repeat: no-repeat;
+
+            @include widthMedia(max, 1601px) {
+                padding-bottom: 46%;
+            }
+
+            @include widthMedia(max, 1539px) {
+                padding-bottom: 52%;
+            }
+
+            @include widthMedia(max, 1369px) {
+                padding-bottom: 54%;
+            }
+
+            @include widthMedia(max, 569px) {
+                padding-bottom: 42%;
+            }
+
+            @include widthMedia(max, 450px) {
+                padding-bottom: 44%;
+            }
+
+            @include widthMedia(max, 420px) {
+                padding-bottom: 53%;
+            }
+
+            @include widthMedia(max, 391px) {
+                padding-bottom: 60%;
+            }
+
+            @include widthMedia(max, 376px) {
+                padding-bottom: 58%;
+            }
+
+            @include widthMedia(max, 321px) {
+                padding-bottom: 63%;
+            }
+
+            .contacts_title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 120px;
+                padding-top: 60px;
+
+                @include widthMedia(max, 1601px) {
+                    padding: 50px 80px 0;
+                }
+
+                @include widthMedia(max, 569px) {
+                    padding: 10px 30px 0;
+                }
+
+                @include widthMedia(max, 376px) {
+                    padding: 10px 20px 0;
+                }
+
+                @include widthMedia(max, 321px) {
+                    padding: 10px 10px 0;
+                }
+
+                .contacts_title_left {
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-between;
+
+                    .contacts_title_left_text {
+                        @include fontFamily('DotGothic16', normal, 58px, 400, #FFFFFF);
+                        letter-spacing: -0.25em;
+                        margin-right: 15px;
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('DotGothic16', normal, 50px, 400, #FFFFFF);
+                            margin-right: 5px;
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            @include fontFamily('DotGothic16', normal, 20px, 400, #FFFFFF);
+                            margin-right: 4px;
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('DotGothic16', normal, 18px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 391px) {
+                            @include fontFamily('DotGothic16', normal, 16px, 400, #FFFFFF);
+                        }
+                    }
+
+                    .contacts_title_left_line {
+                        width: 200px;
+                        height: 2px;
+                        background-color: #FFFFFF;
+                        margin-bottom: 5px;
+                        margin-right: 15px;
+
+                        @include widthMedia(max, 1369px) {
+                            width: 150px;
+                            margin-right: 10px;
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            width: 50px;
+                            height: 0.5px;
+                            margin-right: 2px;
+                            opacity: 0.8;
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            width: 40px;
+                            margin-bottom: 1px;
+                        }
+
+                        @include widthMedia(max, 391px) {
+                            width: 35px;
+                        }
+
+                        @include widthMedia(max, 321px) {
+                            width: 30px;
+                        }
+                    }
+
+                    .contacts_title_left_description {
+                        @include fontFamily('GilroyMedium', normal, 18px, 400, #FFFFFF);
+                        opacity: 0.7;
+                        letter-spacing: 0.25em;
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('GilroyMedium', normal, 16px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 1369px) {
+                            @include fontFamily('GilroyMedium', normal, 14px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            @include fontFamily('GilroyMedium', normal, 6px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 481px) {
+                            @include fontFamily('GilroyMedium', normal, 4px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 391px) {
+                            @include fontFamily('GilroyMedium', normal, 3px, 400, #FFFFFF);
+                        }
+                    }
+                }
+
+                .contacts_title_right {
+
+                    .contacts_title_right_text {
+                        @include fontFamily('DotGothic16', normal, 144px, 400, #FFFFFF);
+                        opacity: 0.1;
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('DotGothic16', normal, 122px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 1369px) {
+                            @include fontFamily('DotGothic16', normal, 100px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            @include fontFamily('DotGothic16', normal, 40px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 391px) {
+                            @include fontFamily('DotGothic16', normal, 35px, 400, #FFFFFF);
+                        }
+
+                        @include widthMedia(max, 321px) {
+                            @include fontFamily('DotGothic16', normal, 32px, 400, #FFFFFF);
+                        }
+                    }
+                }
+            }
+
+            .contacts_block {
+                padding-left: 120px;
+
+                @include widthMedia(max, 1601px) {
+                    padding: 0 80px;
+                    padding-top: 20px;
+                }
+
+                @include widthMedia(max, 569px) {
+                    padding: 20px 30px 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                @include widthMedia(max, 376px) {
+                    padding: 20px 20px 0;
+                }
+
+                @include widthMedia(max, 321px) {
+                    padding: 10px 10px 0;
+                }
+
+                .contacts_block_address {
+
+                    .contacts_block_address_text {
+                        @include fontFamily('GilroyMedium', normal, 18px, 400, #00FFA3);
+                        margin-bottom: 0;
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('GilroyMedium', normal, 16px, 400, #00FFA3);
+                        }
+
+                        @include widthMedia(max, 569px) {
+                            @include fontFamily('GilroyMedium', normal, 9px, 400, #00FFA3);
+                        }
+
+                        @include widthMedia(max, 376px) {
+                            @include fontFamily('GilroyMedium', normal, 7px, 400, #00FFA3);
+                        }
+                    }
+                }
+
+                .font {
+                    @include fontFamily('GilroyMedium', normal, 18px, 400, #FFFFFF);
+                    margin-bottom: 12px;
+
+                    @include widthMedia(max, 1601px) {
+                        @include fontFamily('GilroyMedium', normal, 16px, 400, #FFFFFF);
+                    }
+
+                    @include widthMedia(max, 569px) {
+                        @include fontFamily('GilroyMedium', normal, 9px, 400, #FFFFFF);
+                        text-align: center;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        @include fontFamily('GilroyMedium', normal, 7px, 400, #FFFFFF);
+                        text-align: center;
+                    }
+                }
+
+                .contacts_btn {
+                    width: 286px;
+                    height: 59px;
+                    @include fontFamily('GilroyMedium', normal, 22px, 500, #FFFFFF);
+                    background: linear-gradient(180deg, #00D8A4 0%, #009470 100%);
+                    box-shadow: 6px 6px 17px rgba(3, 23, 32, 0.46);
+                    border-radius: 20px 4px;
+                    margin-top: 30px;
+
+                    &:hover {
+                        background: linear-gradient(180deg, #02bc91 0%, #007155 100%);
+                    }
+
+                    @include widthMedia(max, 1601px) {
+                        @include fontFamily('GilroyMedium', normal, 14px, 500, #FFFFFF);
+                        width: 200px;
+                        height: 40px;
+                        border-radius: 18px 4px;
+                        margin: 15px 0;
+                    }
+
+                    @include widthMedia(max, 481px) {
+                        width: 120px;
+                        height: 30px;
+                        @include fontFamily('GilroyMedium', normal, 10px, 500, #FFFFFF);
+
+                        border-radius: 14px 2px;
+                        margin: 8px 0 0 0;
+                    }
+
+                    @include widthMedia(max, 376px) {
+                        width: 100px;
+                        height: 25px;
+                        @include fontFamily('GilroyMedium', normal, 9px, 500, #FFFFFF);
+                        margin: 8px 0 0 0;
+                        border-radius: 12px 2px;
+                    }
+                }
+            }
+
+            .contacts_map_monitor iframe {
+                position: absolute;
+                top: 5%;
+                right: 6%;
+                width: 874px;
+                height: 411px;
+                border-radius: 16px;
+                opacity: 0.8;
+
+                @include widthMedia(max, 1601px) {
+                    display: none;
+                }
+            }
+
+            .contacts_map_laptop iframe {
+                display: none;
+
+                @include widthMedia(max, 1601px) {
+                    display: block;
+                    position: absolute;
+                    top: 7%;
+                    right: 5%;
+                    width: 524px;
+                    height: 246px;
+                    border-radius: 16px;
+                    opacity: 0.8;
+                }
+
+                @include widthMedia(max, 481px) {
+                    display: none;
+                }
+            }
+
+            .contacts_map_phone iframe {
+                display: none;
+
+                @include widthMedia(max, 481px) {
+                    display: block;
+                    position: absolute;
+                    top: 122%;
+                    left: 0;
+                    right: 0;
+                    margin: 0 auto;
+                    width: 275px;
+                    height: 200px;
+                    border-radius: 16px;
+                }
+
+                @include widthMedia(max, 450px) {
+                    top: 130%;
+                }
+
+                @include widthMedia(max, 420px) {
+                    top: 108%;
+                }
+
+                @include widthMedia(max, 391px) {
+                    top: 100%;
+                }
+
+                @include widthMedia(max, 376px) {
+                    top: 99%;
+                }
+
+                @include widthMedia(max, 321px) {
+                    top: 99%;
+                }
+            }
+        }
+    }
+}
+
+footer {
+    width: 100%;
+    height: 0;
+    padding-bottom: 22%;
+    background-image: url(../images/footer/bgFooter.png);
+    background-repeat: no-repeat;
+    margin-top: -100px;
+
+    @include widthMedia(max, 1601px) {
+        margin-top: 10px;
+        padding-bottom: 21%;
+    }
+
+    @include widthMedia(max, 1539px) {
+        margin-top: 0;
+    }
+
+    @include widthMedia(max, 1369px) {
+        padding-bottom: 24%;
+    }
+
+    @include widthMedia(max, 569px) {
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        padding-bottom: 46%;
+    }
+
+    @include widthMedia(max, 481px) {
+        padding-bottom: 46%;
+    }
+
+    @include widthMedia(max, 420px) {
+        padding-bottom: 53%;
+    }
+
+    @include widthMedia(max, 391px) {
+        padding-bottom: 55%;
+    }
+
+    @include widthMedia(max, 376px) {
+        padding-bottom: 45%;
+    }
+
+    .footer_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 85px 120px 0;
+
+        @include widthMedia(max, 1601px) {
+            padding: 85px 80px 0;
+        }
+
+        @include widthMedia(max, 569px) {
+            justify-content: center;
+            padding: 55px 0 10px;
+        }
+
+        @include widthMedia(max, 376px) {
+            justify-content: center;
+            padding: 35px 0 5px;
+        }
+
+        .footer_logo {
+
+            .footer_logo_img {
+                width: 177px;
+                height: 97px;
+
+                @include widthMedia(max, 569px) {
+                    width: 88px;
+                    height: 48px;
+                }
+
+                @include widthMedia(max, 376px) {
+                    width: 62px;
+                    height: 36px;
+                }
+            }
+        }
+
+        .footer_nav {
+            max-width: 1200px;
+            width: 100%;
+
+            @include widthMedia(max, 1601px) {
+                max-width: 1000px;
+                width: 100%;
+            }
+
+            @include widthMedia(max, 569px) {
+                display: none;
+            }
+
+            .footer_menu {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .footer_menu_category {
+                    display: flex;
+                    justify-content: space-between;
+                    text-align: center;
+
+                    @include widthMedia(max, 1601px) {
+                        flex-direction: column;
+                    }
+
+                    .footer_menu_category_link {
+                        @include fontFamily('GilroyMedium', normal, 18px, 400, #FFFFFF);
+
+                        @include widthMedia(max, 1601px) {
+                            @include fontFamily('GilroyMedium', normal, 16px, 400, #FFFFFF);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footer_box {
+        max-width: 435px;
+        width: 100%;
+        padding-left: 120px;
+        margin-bottom: 43px;
+
+        @include widthMedia(max, 1601px) {
+            padding-left: 80px;
+        }
+
+        @include widthMedia(max, 569px) {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @include widthMedia(max, 481px) {
+            padding-left: 0;
+        }
+
+        @include widthMedia(max, 376px) {
+            width: 100%;
+        }
+
+        .footer_text {
+            @include fontFamily('GilroyMedium', normal, 16px, 400, #FFFFFF);
+            opacity: 0.6;
+
+            @include widthMedia(max, 1601px) {
+                @include fontFamily('GilroyMedium', normal, 14px, 400, #FFFFFF);
+            }
+
+            @include widthMedia(max, 569px) {
+                @include fontFamily('GilroyMedium', normal, 6px, 400, #FFFFFF);
+            }
+
+            @include widthMedia(max, 376px) {
+                @include fontFamily('GilroyMedium', normal, 4px, 400, #FFFFFF);
+            }
+        }
+    }
+
+    .footer_block {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 0 120px;
+
+        @include widthMedia(max, 1601px) {
+            padding: 0 80px;
+        }
+
+        @include widthMedia(max, 569px) {
+            padding: 0;
+            flex-direction: column-reverse;
+            align-items: center;
+            padding-bottom: 20px;
+        }
+
+        @include widthMedia(max, 376px) {
+            padding-bottom: 10px;
+        }
+
+        .footer_copyright,
+        .footer_copyright span {
+            @include fontFamily('GilroyMedium', normal, 16px, 400, #00FFA3);
+
+            @include widthMedia(max, 1601px) {
+                @include fontFamily('GilroyMedium', normal, 14px, 400, #00FFA3);
+            }
+
+            @include widthMedia(max, 569px) {
+                @include fontFamily('GilroyMedium', normal, 7px, 400, #00FFA3);
+            }
+
+        }
+
+        .footer_social_network {
+
+            @include widthMedia(max, 569px) {
+                margin-bottom: 15px;
+            }
+
+            .footer_social_network_list {
+                display: flex;
+
+                .footer_icon {
+                    margin-left: 35px;
+
+                    @include widthMedia(max, 569px) {
+                        margin: 0 20px;
+                    }
+                }
+            }
+        }
+    }
+}
