@@ -376,11 +376,6 @@ header .header_nav .header_menu .header_menu_category {
   }
 }
 
-header .header_nav .header_menu .header_menu_category:hover {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
 header .header_nav .header_menu .header_menu_category .header_menu_category_link {
   font-family: "GilroyMedium";
   font-style: normal;
@@ -403,13 +398,11 @@ header .header_nav .header_menu .header_menu_category .header_menu_category_link
 }
 
 header .header_nav .header_menu .header_menu_category .header_menu_category_link:hover {
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  font-family: "GilroyMedium";
-  font-style: normal;
-  font-size: 24px;
-  font-weight: 500;
-  color: #00FFA3;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  color: #53EE72;
 }
 
 @media screen and (max-width: 601px) {
